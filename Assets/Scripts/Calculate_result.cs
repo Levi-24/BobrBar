@@ -5,6 +5,17 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
+//2023.10.20.
+//Pendroid elsõ forduló
+//Ital automata feladat
+
+//Extra funkciók:
+//-grafikus megjelenítés
+//- háttérzene
+//- hangeffektek
+//- interaktiv játék
+//- saját készitésû sprite-ok
+
 public class CalculateEredmeny : MonoBehaviour
 {
     public Slider elso;
