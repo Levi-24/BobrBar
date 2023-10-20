@@ -6,9 +6,14 @@ using UnityEngine;
 public class Soundsc : MonoBehaviour
 {
 
-    void Awake()
+    private void Awake()
     {
-        DontDestroyOnLoad(transform.gameObject);
+        GameObject[] music = GameObject.FindGameObjectsWithTag("music");
+        if (music.Length>1)
+        {
+            Destroy(this.gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject);
     }
 
 }
