@@ -6,9 +6,12 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] drops;
-    float x1, x2;
+    private float x1, x2;
+    private float nextDropTime = 0f;
+    public float dropInterval = 1f;
 
     private BoxCollider2D col;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -19,20 +22,25 @@ public class Spawner : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Start()
+    void Update()
     {
-        StartCoroutine(SpawnDrops(1f));
+        if (Time.time >= nextDropTime)
+        {
+            SpawnSingleDrop();
+            nextDropTime = Time.time + dropInterval;
+        }
     }
 
-    IEnumerator SpawnDrops(float time)
+    // Egy csepp kiejtése
+    void SpawnSingleDrop()
     {
-        yield return new WaitForSecondsRealtime (time);
+        // vél. pozíció
+        float randomX = Random.Range(x1, x2);
 
-        Vector3 temp = transform.position;
-        temp.x = Random.Range(x1, x2);
+        // vél. drop kiválasztása
+        GameObject randomDrop = drops[Random.Range(0, drops.Length)];
 
-        Instantiate(drops[Random.Range(0, drops.Length)], temp, Quaternion.identity);
-
-        StartCoroutine(SpawnDrops(Random.Range(1f, 2f)));
+        //Drop létrehozása:3
+        Instantiate(randomDrop, new Vector3(randomX, transform.position.y, transform.position.z), Quaternion.identity);
     }
 }
